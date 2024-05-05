@@ -69,6 +69,6 @@ resource "aws_instance" "nginx" {
 
 }
 
-output "nginx_ip" {
+output "nginx_dns" {
   value = aws_instance.nginx.public_dns
 }
