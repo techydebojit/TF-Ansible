@@ -1,0 +1,26 @@
+---
+- name: Install and configure Nginx
+  hosts: webservers
+  become: yes
+  remote_user: ubuntu
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        update_cache: yes
+        state: latest
+
+    - name: Copy index.html
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/index.html
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+    # - name: Make sure Nginx is running
+    #   systemd:
+    #     state: started
+    #     name: nginx
